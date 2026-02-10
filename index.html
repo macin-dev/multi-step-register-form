@@ -35,17 +35,22 @@
 
           <label class="form__label" for="name">
             Name
-            <input type="text" id="name" placeholder="Macin dev" />
+            <input type="text" name="name" id="name" placeholder="Macin dev" />
           </label>
 
           <label class="form__label" for="email">
             Email
-            <input type="email" id="email" placeholder="example@gmail.com" />
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="example@gmail.com"
+            />
           </label>
         </fieldset>
 
         <!-- Step 2 -->
-        <fieldset class="form__group" data-step="2">
+        <fieldset class="form__group" data-step="2" disabled>
           <legend class="form__group-title">
             Which topics you are interested in?
           </legend>
