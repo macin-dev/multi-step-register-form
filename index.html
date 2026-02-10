@@ -28,9 +28,9 @@
     <!-- Main content -->
     <main class="main">
       <!-- Form -->
-      <form class="form">
+      <form class="form" id="multiStepForm">
         <!-- Step 1 -->
-        <fieldset class="form__group show-step">
+        <fieldset class="form__group show-step" data-step="1">
           <legend class="form__group-title">Register</legend>
 
           <label class="form__label" for="name">
@@ -45,7 +45,7 @@
         </fieldset>
 
         <!-- Step 2 -->
-        <fieldset class="form__group">
+        <fieldset class="form__group" data-step="2">
           <legend class="form__group-title">
             Which topics you are interested in?
           </legend>
@@ -64,7 +64,7 @@
         </fieldset>
 
         <!-- Step 3 -->
-        <div class="form__group">
+        <div class="form__group" data-step="3">
           <h2 class="form__group-title">Summary</h2>
 
           <div class="user-name">
@@ -89,5 +89,8 @@
         <button type="submit" class="btn-continue">Continue</button>
       </form>
     </main>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
   </body>
 </html>
