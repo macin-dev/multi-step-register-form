@@ -7,6 +7,8 @@
   --text: #e5e7eb;
   --bg: #121826;
   --focus: #a1a1a9;
+  --purple-border-input: #845eee4d;
+  --checkbox-input: #394150;
 }
 
 body {
@@ -41,6 +43,7 @@ body {
   border: none;
   padding: 0;
   margin: 0;
+  display: none;
 }
 
 .form__group-title {
@@ -80,6 +83,54 @@ body {
   box-shadow: 0 0 2px var(--focus);
 }
 
+/* STEP 2 */
+.form__label-2 input[type="checkbox"] {
+  display: none;
+}
+
+.form__label-2 {
+  display: block;
+  padding: 1.125em 1em;
+  border-radius: 0.75em;
+  background-color: var(--checkbox-input);
+  color: var(--focus);
+  border: 1px solid var(--border-input);
+}
+
+.form__label-2:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+/* SUMMARY STEP */
+h2 {
+  margin: 0;
+}
+
+.user-name {
+  margin-bottom: 0.5em;
+}
+
+.user-email {
+  margin-bottom: 1em;
+}
+
+.user-topics ul {
+  margin: 0;
+  padding: 1em 0 0 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.placeholder {
+  color: var(--focus);
+  letter-spacing: 0.03125em;
+}
+
+.value {
+  font-weight: 500;
+}
+
 /* Button */
 .btn-continue {
   display: block;
@@ -90,4 +141,8 @@ body {
   color: inherit;
   border-radius: 2em;
   font-size: 1em;
+}
+
+.show-step {
+  display: block !important;
 }
