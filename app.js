@@ -39,7 +39,7 @@ function validateForm(fields) {
     if (inputEl.type === "checkbox") {
       if (inputEl.checked) checkboxOptions++;
       if (checkboxOptions === 0 && index === fields.length - 1) {
-        errors["checkbox"] = "Please, choose one option";
+        errors["option3"] = "Please, choose one or more options";
       }
     } else if (!inputEl.value.trim()) {
       errors[inputEl.name] = `The ${inputEl.name} field is required`;
@@ -49,9 +49,44 @@ function validateForm(fields) {
   return errors;
 }
 
+// Display error UI feedback when inputs are empty
 function showError(errors) {
-  // TODO -> Show UI feedback
-  console.log(errors);
+  // Clean previous errors - It updates the DOM if there are valid inputs
+  const errorElements = document.querySelectorAll(".error-message");
+  if (errorElements.length > 0) {
+    removeError(errorElements);
+  }
+
+  for (const [key, value] of Object.entries(errors)) {
+    const targetInput = document.getElementsByName(key)[0];
+
+    // Create an span element for each invalid input
+    const span = document.createElement("span");
+    span.className = "error-message";
+    span.textContent = value;
+
+    if (targetInput.type === "checkbox") {
+      targetInput.parentElement.parentElement.appendChild(span);
+    } else {
+      targetInput.classList.add("error-outline");
+      targetInput.parentElement.appendChild(span);
+    }
+  }
+}
+
+// Removes existing error elements in the DOM
+function removeError(errorElements) {
+  // Remove elements with the class "error-message"
+  errorElements.forEach((el) => {
+    const previousElement = el.previousElementSibling;
+
+    // Remove the class "error-outline" from inputs
+    if (previousElement.classList.contains("error-outline")) {
+      previousElement.classList.remove("error-outline");
+    }
+
+    el.remove();
+  });
 }
 
 // It highlights the checked state of the checkbox input
@@ -74,6 +109,10 @@ document.getElementById("multiStepForm").addEventListener("submit", (event) => {
 
   // It evaluates if errors exist to display UI feedback
   if (Object.keys(errors).length > 0) return showError(errors);
+
+  // It validates if previous errors still exist in the DOM
+  const errorElements = document.querySelectorAll(".error-message");
+  if (errorElements.length > 0) removeError(errorElements);
 
   nextStep();
 });

@@ -9,6 +9,7 @@
   --focus: #a1a1a9;
   --purple-border-input: #845eee4d;
   --checkbox-input: #394150;
+  --error-message: #dc0000;
 }
 
 body {
@@ -190,4 +191,15 @@ h2 {
 
 .show-step {
   display: block !important;
+}
+
+/* Form Error */
+.error-message {
+  color: var(--error-message);
+  font-size: 0.875em;
+  letter-spacing: 0.03125em;
+}
+
+.error-outline {
+  border: 2px solid var(--error-message) !important;
 }
