@@ -1,23 +1,50 @@
 // Modules
-import { state } from "../app.js";
-import { checkboxElements, dotButtons, fieldSets, formEl } from "./ui.js";
+import { getFormData, setFormData, state } from "../app.js";
+import {
+  checkboxElements,
+  dotButtons,
+  emailSpan,
+  fieldSets,
+  formEl,
+  topicsUl,
+  userNameSpan,
+} from "./ui.js";
 import { removeError, showError, validateForm } from "./formValidation.js";
 import { nextStep, prevStep, showDotNavigation } from "./stepNavigation.js";
+
+function displayData(data) {
+  userNameSpan.textContent = data.name;
+  emailSpan.textContent = data.email;
+
+  data.topics.forEach((topic) => {
+    const li = document.createElement("li");
+    li.textContent = topic;
+
+    topicsUl.appendChild(li);
+  });
+}
 
 function continueStep() {
   if (state.dotSteps !== state.currentStep) {
     return nextStep();
   }
 
-  if (state.currentStep === state.lastStep) return;
-
   state.currentStep++;
   state.dotSteps++;
 
-  if (state.currentStep <= state.lastStep) {
-    showStep(state.currentStep);
-    showDotNavigation(state.currentStep);
+  if (state.currentStep > state.lastStep) {
+    alert("🎉 Thanks for your precious time!");
+    window.location.reload();
+    return;
   }
+
+  if (state.currentStep === state.lastStep) {
+    const data = getFormData();
+    displayData(data);
+  }
+
+  showStep(state.currentStep);
+  showDotNavigation(state.currentStep);
 }
 
 export function showStep(step) {
@@ -43,6 +70,9 @@ export function submitHandler(event) {
 
   // It evaluates if errors exist to display UI feedback
   if (Object.keys(errors).length > 0) return showError(errors);
+
+  // Set data
+  setFormData(fields);
 
   // It validates if previous errors still exist in the DOM
   const errorElements = document.querySelectorAll(".error-message");

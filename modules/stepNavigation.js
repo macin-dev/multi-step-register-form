@@ -9,11 +9,9 @@ export function showDotNavigation(step) {
     if (btnStep === step) {
       el.classList.add("btn__dot--active");
       el.ariaCurrent = "step";
-      el.ariaHidden = "false";
     } else {
       el.classList.remove("btn__dot--active");
       el.ariaCurrent = "false";
-      el.ariaHidden = "true";
     }
   });
 
