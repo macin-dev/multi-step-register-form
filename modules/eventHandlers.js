@@ -26,9 +26,11 @@ export function showStep(step) {
     if (step === stepEl) {
       el.classList.add("show-step");
       el.disabled = false;
+      el.ariaHidden = "false";
     } else {
       el.classList.remove("show-step");
       el.disabled = true;
+      el.ariaHidden = "true";
     }
   });
 }

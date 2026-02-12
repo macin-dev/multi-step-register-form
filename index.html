@@ -50,7 +50,7 @@
         </fieldset>
 
         <!-- Step 2 -->
-        <fieldset class="form__group" data-step="2" disabled>
+        <fieldset class="form__group" data-step="2" disabled aria-hidden="true">
           <legend class="form__group-title">
             Which topics you are interested in?
           </legend>
@@ -69,7 +69,7 @@
         </fieldset>
 
         <!-- Step 3 -->
-        <div class="form__group" data-step="3">
+        <div class="form__group" data-step="3" aria-hidden="true">
           <h2 class="form__group-title">Summary</h2>
 
           <div class="user-name">
@@ -96,14 +96,32 @@
 
       <!-- Navigation buttons -->
 
-      <div class="navigation">
-        <span class="navigation__steps-text"
+      <div
+        class="navigation"
+        aria-label="Use these 3 dots for navigation between the form steps"
+      >
+        <span class="navigation__steps-text" aria-live="polite"
           >Step <span id="currentStep">1</span> of
           <span id="lastStep">3</span></span
         >
-        <button class="btn__dot btn__dot--active" data-btn-step="1"></button>
-        <button class="btn__dot" data-btn-step="2"></button>
-        <button class="btn__dot" data-btn-step="3"></button>
+        <button
+          class="btn__dot btn__dot--active"
+          data-btn-step="1"
+          aria-label="Go to step 1"
+          aria-current="step"
+        ></button>
+        <button
+          class="btn__dot"
+          data-btn-step="2"
+          aria-label="Go to step 2"
+          aria-hidden="true"
+        ></button>
+        <button
+          class="btn__dot"
+          data-btn-step="3"
+          aria-label="Go to step 3"
+          aria-hidden="true"
+        ></button>
       </div>
     </main>
 

@@ -21,6 +21,7 @@ body {
 }
 
 .main {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,7 +64,12 @@ body {
 }
 
 .form::after {
-  content: url("assets/blur-radial.png");
+  content: "";
+  background: url("assets/blur-radial.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 90%;
+  width: 90%;
   position: absolute;
   top: -30%;
   left: -30%;
@@ -243,4 +249,16 @@ h2 {
 
 .error-outline {
   border: 2px solid var(--error-message) !important;
+}
+
+@media screen and (min-width: 1024px) {
+  .btn-continue:hover {
+    background: linear-gradient(180deg, #652cd1 0%, #845eee 100%);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .main {
+    padding: 0 1.1875em;
+  }
 }
