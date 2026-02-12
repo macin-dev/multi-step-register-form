@@ -189,6 +189,47 @@ h2 {
   outline: 2px solid var(--focus);
 }
 
+/* Navigation dots */
+.navigation {
+  margin-top: 1.5em;
+  display: flex;
+  align-items: center;
+  column-gap: 1.125em;
+}
+
+.navigation__steps-text {
+  color: var(--focus);
+}
+
+.btn__dot {
+  --dot-dimensions: 0.875em;
+  border: none;
+  padding: 0;
+  background-color: var(--bg-form);
+  width: var(--dot-dimensions);
+  height: var(--dot-dimensions);
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn__dot--active {
+  transform: scale(2);
+}
+
+.btn__dot--active::after {
+  content: "";
+  background-color: var(--dark-purple);
+  width: calc(100% / 2);
+  height: calc(100% / 2);
+  border-radius: inherit;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .show-step {
   display: block !important;
 }

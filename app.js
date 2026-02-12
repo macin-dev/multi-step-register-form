@@ -1,8 +1,10 @@
 const fieldSets = document.querySelectorAll(".form__group");
 const checkboxElements = document.querySelectorAll('input[type="checkbox"]');
 const formEl = document.getElementById("multiStepForm");
+const dotButtons = document.querySelectorAll(".btn__dot");
 
 let currentStep = 1;
+let dotSteps = currentStep;
 
 function showStep(step) {
   fieldSets.forEach((el) => {
@@ -18,16 +20,49 @@ function showStep(step) {
   });
 }
 
-function nextStep() {
-  currentStep++;
+function showDotNavigation(step) {
+  dotButtons.forEach((el) => {
+    const btnStep = Number(el.dataset.btnStep);
 
-  if (currentStep <= 3) showStep(currentStep);
+    if (btnStep === step) {
+      el.classList.add("btn__dot--active");
+    } else {
+      el.classList.remove("btn__dot--active");
+    }
+  });
+
+  // Display number step
+  document.getElementById("currentStep").textContent = step;
+}
+
+function continueStep() {
+  if (dotSteps !== currentStep) {
+    return nextStep();
+  }
+
+  if (currentStep === 3) return;
+
+  currentStep++;
+  dotSteps = currentStep;
+
+  if (currentStep <= 3) {
+    showStep(currentStep);
+    showDotNavigation(currentStep);
+  }
+}
+
+function nextStep() {
+  dotSteps++;
+
+  showStep(dotSteps);
+  showDotNavigation(dotSteps);
 }
 
 function prevStep() {
-  currentStep--;
+  dotSteps--;
 
-  if (currentStep >= 1) showStep(currentStep);
+  showStep(dotSteps);
+  showDotNavigation(dotSteps);
 }
 
 // It returns an object if type (text, email, checkbox) inputs are empty
@@ -101,6 +136,31 @@ checkboxElements.forEach((el) => {
   });
 });
 
+// It goes to the next or previous step
+// Only if are adjacents of the current dot step
+dotButtons.forEach((el) => {
+  el.addEventListener("click", () => {
+    const btnStep = Number(el.dataset.btnStep);
+
+    // Validate errors first before moving onto another available step
+    const errors = document.querySelectorAll(".error-message");
+    if (errors.length > 0) return;
+
+    // It calculates the distance of the selected step
+    const distance = Math.abs(dotSteps - btnStep);
+
+    if (btnStep < dotSteps && distance === 1) {
+      prevStep();
+    } else if (
+      btnStep > dotSteps &&
+      distance === 1 &&
+      dotSteps !== currentStep
+    ) {
+      nextStep();
+    }
+  });
+});
+
 document.getElementById("multiStepForm").addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -114,7 +174,7 @@ document.getElementById("multiStepForm").addEventListener("submit", (event) => {
   const errorElements = document.querySelectorAll(".error-message");
   if (errorElements.length > 0) removeError(errorElements);
 
-  nextStep();
+  continueStep();
 });
 
 showStep(currentStep);
